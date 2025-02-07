@@ -615,7 +615,7 @@ def separate_independent_conditional_implementation(
             Kmm, Kmn, Knn, f = t
             return base_conditional(Kmn, Kmm, Knn, f, full_cov=full_cov, q_sqrt=q_sqrt, white=white)
 
-    rmu, rvar = tf.map_fn(
+    rmu, rvar = tf.vectorized_map(
         single_gp_conditional, base_conditional_args_to_map, (default_float(), default_float())
     )  # [P, N, 1], [P, 1, N, N] or [P, N, 1]
 
